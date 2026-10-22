@@ -1,0 +1,36 @@
+# Runs on every pull request and on every push to main.
+# Each step mirrors a command you can run locally, so a red CI is reproducible.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel an older run on the same branch when a new commit arrives.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # Reads the pnpm version from "packageManager" in package.json.
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      # --frozen-lockfile fails if package.json and pnpm-lock.yaml disagree.
+      - run: pnpm install --frozen-lockfile
+      - name: Lint and format
+        run: pnpm check
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Test
+        run: pnpm test

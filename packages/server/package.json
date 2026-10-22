@@ -1,0 +1,16 @@
+{
+	"name": "@bmi/server",
+	"version": "0.0.0",
+	"private": true,
+	"description": "Local server: MCP over stdio for Claude Code, HTTP for the browser UI.",
+	"type": "module",
+	"scripts": {
+		"typecheck": "tsc",
+		"test": "vitest run"
+	},
+	"devDependencies": {
+		"@types/node": "^24.19.2",
+		"typescript": "7.0.2",
+		"vitest": "5.0.5"
+	}
+}

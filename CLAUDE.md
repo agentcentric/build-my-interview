@@ -22,9 +22,16 @@ It ships as a Claude Code plugin plus a local web UI. Product plan and decisions
 
 ## Before you say something is done
 
-- Run the checks and report the real result, failures included. (Commands are added here once tooling exists.)
+- Run the checks and report the real result, failures included. CI runs the same commands on every PR.
+- Use Node 24 (see `.nvmrc`) and pnpm. Run commands from the repo root:
+  - `pnpm install` installs all workspace packages.
+  - `pnpm check` runs Biome (lint and format check). `pnpm fix` applies safe fixes and formatting.
+  - `pnpm typecheck` runs `tsc` in every package.
+  - `pnpm test` runs Vitest in every package.
 - Never commit secrets. `.env` files are gitignored, and only `.env.example` is committed.
 
 ## Layout
 
-Added here as the repo takes shape.
+- `packages/server/`: the local Node program. It speaks MCP (JSON-RPC over stdio, written by hand) to Claude Code, and will serve HTTP to the browser UI. Never write to stdout except MCP messages; log to stderr.
+- `tsconfig.base.json`, `biome.json`: shared TypeScript and Biome settings.
+- `.github/workflows/ci.yml`: CI for every PR.
