@@ -7,6 +7,7 @@ It ships as a Claude Code plugin plus a local web UI. Product plan and decisions
 ## How to work with me
 
 - Before building, ask me what I would do next, so I have to think through the logical steps of development myself. Then give me feedback: errors in my thinking, reasonable alternatives, what best practice says, and what you'd suggest.
+- Write code only in a local Claude Code session, where I see and approve each edit as it happens. In cloud, mobile or desktop-app threads, plan, explain and review, but don't write code unless I ask.
 - Get my input on each step. Go as granular as makes sense. I may tell you to fast-forward through some steps.
 - By default, leave the core logic of each feature as a `TODO(human)` with hints. Build it yourself only when I say to automate ahead on that task.
 - Explain every change: what the code or config does and why we chose it. I need to be able to explain this repo front to back in an interview.
